@@ -7,11 +7,24 @@ function appStart() {
         {   type: 'list',
             name: 'action',
             message: 'Please select what you would like to do.',
-            choices: ['View', 'Add', 'Update']
+            choices: ['View', 'Add', 'Update', 'Exit']
         }
 ]).then(data => {
     // Switch statement to run function based on the action use chose.
     console.log(data.action)
+
+    switch(data.action) {
+        case 'View': console.log('you chose view');
+        break;
+
+        case 'Add': console.log('you chose add');
+        break;
+
+        case 'Update': console.log('you chose update');
+        break;
+
+        case 'Exit': process.exit();
+    }
 });
 }; // appStart
 
