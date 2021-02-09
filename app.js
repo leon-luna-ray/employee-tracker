@@ -6,12 +6,11 @@ function appStart() {
     inquirer.prompt([
         {   type: 'list',
             name: 'action',
-            message: 'Please select what you would like to do.',
+            message: 'Welcome to the employee tracker. Please select what you would like to do.',
             choices: ['View', 'Add', 'Update', 'Exit']
         }
 ]).then(data => {
     // Switch statement to run function based on the action use chose.
-    console.log(data.action)
 
     switch(data.action) {
         case 'View': console.log('you chose view');
