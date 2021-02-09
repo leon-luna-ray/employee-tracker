@@ -1,0 +1,28 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "Employee tracking application.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leon-luna-ray/employee-tracker.git"
+  },
+  "keywords": [
+    "employee",
+    "tracker",
+    "application"
+  ],
+  "author": "Ray Luna",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leon-luna-ray/employee-tracker/issues"
+  },
+  "homepage": "https://github.com/leon-luna-ray/employee-tracker#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3",
+    "mysql": "^2.18.1"
+  }
+}
