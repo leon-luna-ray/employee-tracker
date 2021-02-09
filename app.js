@@ -27,6 +27,18 @@ function appStart() {
 });
 }; // appStart
 
+function view() {
+    inquirer.prompt([]).then();
+};
+
+function add() {
+    inquirer.prompt([]).then();
+};
+
+function update() {
+    inquirer.prompt([]).then();
+};
+
 appStart();
 
 // Task functions
