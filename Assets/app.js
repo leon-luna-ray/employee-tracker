@@ -3,6 +3,20 @@ const mysql = require('mysql');
 
 // Greet and ask user what they would like to do
 function appStart() {
+    // // From maryus
+    // // const answers = await promtpOptions();
+    // // handleAnswers(answers);
+
+    // const controller = {
+    //     viewDepartment: displayDepartments,
+    //     viewEmployees: displayEmployees,
+    //     viewRoles: displayRoles
+    // }
+
+    // function handleAnswers(answers) {
+
+    // };
+
     inquirer.prompt([
         {   type: 'list',
             name: 'action',
