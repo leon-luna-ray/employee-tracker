@@ -19,37 +19,44 @@ const connection = mysql.createConnection({
 connection.connect((err) => {
     if (err) throw err;
     console.log(`connected as id ${connection.threadId}\n`);
+
+    // Invoke start app once connection is complete.
     appStart();
   });
-  
 
-// Greet and ask user what they would like to do
-function appStart() {
-    // // From maryus
-    // // const answers = await promtpOptions();
-    // // handleAnswers(answers);
 
-    // const controller = {
-    //     viewDepartment: displayDepartments,
-    //     viewEmployees: displayEmployees,
-    //     viewRoles: displayRoles
-    // }
+
+    const controller = {
+        // viewDepartment: displayDepartments(),
+        viewEmployees: displayEmployees()
+        // viewRoles: displayRoles()
+    }
 
     // function handleAnswers(answers) {
 
     // };
+  
+
+// Greet and ask user what they would like to do
+function appStart() {
 
     inquirer.prompt([
         {   type: 'list',
             name: 'action',
             message: 'Welcome to the employee tracker. Please select what you would like to do.',
             choices: ['View', 'Add', 'Update', 'Exit']
+        },
+        {
+            type: 'list',
+            name: 'type',
+            message: 'Select type',
+            choices: ['Employees', 'Roles', 'Departments']
         }
 ]).then(data => {
     // Switch statement to run function based on the action use chose.
 
-    switch(data.action) {
-        case 'View': console.log('you chose view');
+    switch(data.action.type) {
+        case 'View': console.log('view employees worked')
         break;
 
         case 'Add': console.log('you chose add');
@@ -63,26 +70,33 @@ function appStart() {
 });
 }; // appStart
 
-function view() {
-    inquirer.prompt([
-        {type: 'list',
-        name: 'action',
-        message: 'What would you like to view?',
-        choices: ['Departments', 'Roles', 'Employees', 'Exit']
-    }
-    ]).then(data => {
-        switch (data.action) {
-            case 'Departments': viewDepartments();
-                break;
+    // // From maryus
+    // const answers = await promtpOptions();
+    // handleAnswers(answers);
+
+
+
+
+// function view() {
+//     inquirer.prompt([
+//         {type: 'list',
+//         name: 'action',
+//         message: 'What would you like to view?',
+//         choices: ['Departments', 'Roles', 'Employees', 'Exit']
+//     }
+//     ]).then(data => {
+//         switch (data.action) {
+//             case 'Departments': viewDepartments();
+//                 break;
         
-            default:
-                break;
-        }
-    });
-};
+//             default:
+//                 break;
+//         }
+//     });
+// };
 
-function viewDepartments() {
-
+function displayEmployees() {
+    console.log('it fired')
 };
 
 function add() {
@@ -92,8 +106,6 @@ function add() {
 function update() {
     inquirer.prompt([]).then();
 };
-
-appStart();
 
 // Task functions
 // Add departments, roles, employees
