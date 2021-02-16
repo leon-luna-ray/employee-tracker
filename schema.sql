@@ -29,5 +29,7 @@ CREATE TABLE employee (
   PRIMARY KEY (id)
 );
 
-INSERT INTO department (name)
+
+-- Add dummy values to table
+INSERT INTO department(name)
 VALUES ("Sales");

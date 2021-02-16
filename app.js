@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
     // Your username
     user: 'root',
   
-    // Be sure to update with your own MySQL password!
+    // db login
     password: process.env.DB_PASSWORD,
     database: 'employee_db',
   });
@@ -19,7 +19,7 @@ const connection = mysql.createConnection({
 connection.connect((err) => {
     if (err) throw err;
     console.log(`connected as id ${connection.threadId}\n`);
-    createProduct();
+    appStart();
   });
   
 
