@@ -1,5 +1,27 @@
+require('dotenv').config();
 const inquirer = require('inquirer');
 const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+    host: 'localhost',
+  
+    // Your port; if not 3306
+    port: 3306,
+  
+    // Your username
+    user: 'root',
+  
+    // Be sure to update with your own MySQL password!
+    password: process.env.DB_PASSWORD,
+    database: 'employee_db',
+  });
+
+connection.connect((err) => {
+    if (err) throw err;
+    console.log(`connected as id ${connection.threadId}\n`);
+    createProduct();
+  });
+  
 
 // Greet and ask user what they would like to do
 function appStart() {
@@ -42,7 +64,25 @@ function appStart() {
 }; // appStart
 
 function view() {
-    inquirer.prompt([]).then();
+    inquirer.prompt([
+        {type: 'list',
+        name: 'action',
+        message: 'What would you like to view?',
+        choices: ['Departments', 'Roles', 'Employees', 'Exit']
+    }
+    ]).then(data => {
+        switch (data.action) {
+            case 'Departments': viewDepartments();
+                break;
+        
+            default:
+                break;
+        }
+    });
+};
+
+function viewDepartments() {
+
 };
 
 function add() {
