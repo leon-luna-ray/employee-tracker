@@ -96,6 +96,7 @@ function appStart() {
 // };
 
 function displayEmployees() {
+    // this is working for now
     console.log('it fired')
 };
 
