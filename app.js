@@ -77,20 +77,7 @@ function appStart() {
         }
         break;
 
-        case 'Update': console.log('Update');
-        switch (data.type) {
-        
-            case 'Employees': 
-                updateEmployees();
-                break;
-        
-            case 'Roles':
-                updateRoles();
-                break;
-            case 'Departments':
-                updateDepartments();
-                break;
-        }
+        case 'Update': updateRoles();
         break;
 
         case 'Exit': process.exit();
@@ -100,7 +87,6 @@ function appStart() {
 });
 }; 
 
-
 function viewEmployees() {
     connection.query('SELECT * FROM employee', (err, res) => {
         if (err) throw err;
@@ -109,6 +95,26 @@ function viewEmployees() {
         appStart();
       });
 };
+
+function viewRoles() {
+    connection.query('SELECT * FROM role', (err, res) => {
+        if (err) throw err;
+        // Log all results of the SELECT statement
+        console.table(res);
+        appStart();
+      });
+};
+
+function viewDepartments() {
+    connection.query('SELECT * FROM department', (err, res) => {
+        if (err) throw err;
+        // Log all results of the SELECT statement
+        console.table(res);
+        appStart();
+      });
+};
+
+
 
 function addEmployees() {
     inquirer.prompt([
@@ -138,43 +144,6 @@ function addEmployees() {
 
 
 
-function viewDepartments() {
-    connection.query('SELECT * FROM department', (err, res) => {
-        if (err) throw err;
-        // Log all results of the SELECT statement
-        console.table(res);
-        appStart();
-      });
-};
-
-function addDepartments() {
-    inquirer.prompt([
-        {
-            type: 'input',
-            name: 'departmentName',
-            message: 'What is the department name?'
-        }
-    ]).then(data => {
-        connection.query('INSERT INTO department SET ?', {
-            name: data.departmentName
-        },  (err, res) => {
-            if (err) throw err;
-            console.log(`${res.affectedRows} department added!\n`);
-
-            appStart();
-          })
-    });
-};
-
-function viewRoles() {
-    connection.query('SELECT * FROM role', (err, res) => {
-        if (err) throw err;
-        // Log all results of the SELECT statement
-        console.table(res);
-        appStart();
-      });
-};
-
 function addRoles() {
     inquirer.prompt([
         {
@@ -201,11 +170,47 @@ function addRoles() {
     });
 };
 
-function update() {
-    inquirer.prompt([]).then();
+function addDepartments() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'departmentName',
+            message: 'What is the department name?'
+        }
+    ]).then(data => {
+        connection.query('INSERT INTO department SET ?', {
+            name: data.departmentName
+        },  (err, res) => {
+            if (err) throw err;
+            console.log(`${res.affectedRows} department added!\n`);
+
+            appStart();
+          })
+    });
 };
 
-// Task functions
-// Add departments, roles, employees
-// View departments, roles, employees
-// Update employee roles
+function updateRoles() {
+    
+    connection.query('SELECT * FROM employee', (err, res) => {
+            if (err) throw err  
+            inquirer
+            .prompt([
+              {
+                name: 'choice',
+                type: 'rawlist',
+                choices() {
+                  const employeeArray = [];
+                  res.forEach(({ first_name }) => {
+                    employeeArray.push(first_name);
+                  });
+                  
+                  return employeeArray;
+                },
+                message: 'Which employee would you like to update?',
+              },
+            ]);
+            
+    });
+
+    
+};
