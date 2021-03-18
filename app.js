@@ -208,8 +208,11 @@ function updateRoles() {
                 },
                 message: 'Which employee would you like to update?',
               },
-            ]);
-            
+              
+            ]).then(data => {
+                connection.query('SELECT * FROM role', (err, res) => {})
+            });
+            // need to find a way to choose from the list of roles....
     });
 
     
