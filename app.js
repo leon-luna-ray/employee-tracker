@@ -78,7 +78,19 @@ function appStart() {
                 }
                 break;
 
-            case 'Update': updateRoles();
+            case 'Update': 
+                switch (data.type) {
+
+                    case 'Employees':
+                        updateEmployee();
+                        break;
+
+                    // case 'Roles':
+                    //     updateRole();
+
+                    // case 'Departments':
+                    //     updateDepartment();
+                }
                 break;
 
             case 'Exit': process.exit();
@@ -190,14 +202,14 @@ function addDepartments() {
     });
 };
 
-function updateRoles() {
+function updateEmployee() {
 
     connection.query('SELECT * FROM employee', (err, res) => {
         if (err) throw err
         inquirer
             .prompt([
                 {
-                    name: 'choice',
+                    name: 'list',
                     type: 'rawlist',
                     choices() {
                         const employeeArray = [];
@@ -246,7 +258,7 @@ function updateRoles() {
                                     appStart();
                                 });
                         });
-                    // need to find a way to choose from the list of roles....
+
                 });
             });
     });
