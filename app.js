@@ -209,12 +209,13 @@ function updateEmployee() {
         inquirer
             .prompt([
                 {
-                    name: 'list',
+                    name: 'choice',
                     type: 'rawlist',
                     choices() {
                         const employeeArray = [];
-                        res.forEach(({ first_name }) => {
-                            employeeArray.push(first_name);
+                        res.forEach(({ id, first_name, last_name }) => {
+                            const employee = `ID: ${id}, Name: ${first_name} ${last_name}`
+                            employeeArray.push(employee);
                         });
 
                         return employeeArray;
@@ -246,7 +247,7 @@ function updateEmployee() {
                                 'UPDATE employee SET ? WHERE ?',
                                 [
                                     {
-                                        role_id: roleData.role,
+                                        role_id: roleData.choices().value,
                                     },
                                     {
                                         first_name: employeeData.choice,
